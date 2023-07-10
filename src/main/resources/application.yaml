@@ -1,0 +1,6 @@
+spring:
+  jpa:
+    generate-ddl: true
+  docker:
+    compose:
+      lifecycle-management: start_only
