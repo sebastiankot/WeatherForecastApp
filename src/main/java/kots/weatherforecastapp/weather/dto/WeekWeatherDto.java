@@ -1,8 +1,8 @@
-package kots.weatherforecastapp.weather;
+package kots.weatherforecastapp.weather.dto;
 
 import java.util.List;
 
-record WeekWeatherDto(
+public record WeekWeatherDto(
         double latitude,
         double longitude,
         List<WeatherDayDto> weatherByDay
