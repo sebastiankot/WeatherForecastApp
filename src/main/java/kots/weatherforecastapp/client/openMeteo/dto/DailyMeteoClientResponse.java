@@ -3,7 +3,7 @@ package kots.weatherforecastapp.client.openMeteo.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 public record DailyMeteoClientResponse(
@@ -12,8 +12,8 @@ public record DailyMeteoClientResponse(
         List<LocalDate> date,
         @JsonProperty("precipitation_sum")
         List<Double> precipitationSum,
-        List<LocalDateTime> sunrise,
-        List<LocalDateTime> sunset
+        List<LocalTime> sunrise,
+        List<LocalTime> sunset
 ) {
 
 }
