@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-class RequestLoggerService implements  WeatherLogger {
+class RequestLoggerService implements WeatherLogger {
 
     private final WeatherRequestRepository weatherRequestRepository;
 
