@@ -16,7 +16,7 @@ class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(OpenMeteoException.class)
     ProblemDetail handleOpenMeteoException(OpenMeteoException exception) {
         log.error("OpenMeteo Error! Message:" +  exception.getMessage());
-        var problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Contact with administrator");
+        var problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, "Contact with administrator");
         problemDetail.setTitle("External Api Problem");
         return problemDetail;
     }

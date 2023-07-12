@@ -1,2 +1,3 @@
 open-meteo:
-  url: example.apis/
+  url: https://example.apis/
+  pastDays: 7
