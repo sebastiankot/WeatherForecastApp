@@ -2,6 +2,7 @@ package kots.weatherforecastapp.weather;
 
 import kots.weatherforecastapp.weather.dto.WeekWeatherDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +15,7 @@ class WeatherController {
 
     private final WeatherService weatherService;
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     WeekWeatherDto lastWeekWeather(@RequestParam("latitude") double latitude, @RequestParam("longitude") double longitude) {
         return weatherService.getLastWeekWeather(latitude, longitude);
     }

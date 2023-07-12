@@ -5,6 +5,7 @@ import kots.weatherforecastapp.client.openMeteo.dto.MeteoClientResponse;
 import kots.weatherforecastapp.logging.WeatherLogger;
 import kots.weatherforecastapp.weather.dto.WeatherDayDto;
 import kots.weatherforecastapp.weather.dto.WeekWeatherDto;
+import kots.weatherforecastapp.weather.exception.BoundOfCoordinatesValueException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +19,20 @@ class WeatherService {
     private final WeatherLogger weatherLogger;
 
     WeekWeatherDto getLastWeekWeather(double latitude, double longitude) {
+        validationCoordinates(latitude, longitude);
         MeteoClientResponse meteoClientResponse = openMeteoClient.weatherOfLastWeek(latitude, longitude);
         List<WeatherData> weatherData = WeatherMapper.mapToWeatherList(meteoClientResponse.daily());
         weatherLogger.saveDataRequest(latitude, longitude);
         return new WeekWeatherDto(latitude, longitude, getWeatherDayDtoList(weatherData));
+    }
+
+    private void validationCoordinates(double latitude, double longitude) {
+        if(!validateCoordinatesRange(latitude) || !validateCoordinatesRange(longitude))
+            throw new BoundOfCoordinatesValueException("Coordinate boundaries: minimum is 0 and maximum is 180.");
+    }
+
+    private boolean validateCoordinatesRange(double coordinates) {
+        return coordinates > 0 && coordinates < 180;
     }
 
     private List<WeatherDayDto> getWeatherDayDtoList(List<WeatherData> weatherData) {
