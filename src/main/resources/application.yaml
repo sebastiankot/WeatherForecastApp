@@ -7,4 +7,10 @@ spring:
       lifecycle-management: start_only
 
 open-meteo:
-  url: https://api.open-meteo.com/v1/
+  url: https://api.open-meteo.com/v1
+  pastDays: 7
+
+rest:
+  connection:
+    connectionRequestTimeout: 5s
+    readTimeout: 10s
