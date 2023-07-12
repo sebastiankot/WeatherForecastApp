@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WeatherMapperTest {
 
     @Test
-    void shouldMapDailyMeteoClientResponseToWeatherDataList() {
+    public void shouldMapDailyMeteoClientResponseToWeatherDataList() {
         // given
         DailyMeteoClientResponse dailyMeteoClientResponse = MeteoClientResponseDataHelper.createDailyMeteoClientResponse();
 

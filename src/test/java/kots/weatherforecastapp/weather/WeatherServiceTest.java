@@ -4,8 +4,11 @@ import kots.weatherforecastapp.client.openMeteo.OpenMeteoClient;
 import kots.weatherforecastapp.logging.WeatherLogger;
 import kots.weatherforecastapp.weather.dto.WeatherDayDto;
 import kots.weatherforecastapp.weather.dto.WeekWeatherDto;
+import kots.weatherforecastapp.weather.exception.BoundOfCoordinatesValueException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -15,6 +18,7 @@ import static kots.weatherforecastapp.weather.MeteoClientResponseDataHelper.EXAM
 import static kots.weatherforecastapp.weather.MeteoClientResponseDataHelper.EXAMPLE_SUNSET_TIME;
 import static kots.weatherforecastapp.weather.MeteoClientResponseDataHelper.createMeteoClientResponse;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -51,5 +55,11 @@ public class WeatherServiceTest {
         assertThat(anyDay.sunset()).isEqualTo(EXAMPLE_SUNSET_TIME);
         assertThat(anyDay.sunrise()).isEqualTo(EXAMPLE_SUNRISE_TIME);
         assertThat(anyDay.averageRainfall()).isEqualTo(0);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"5.1, 193", "-2.1, 24", "84, -240"})
+    public void shouldThrowAnExceptionWhenParametersAreBoundOfValues(double latitude, double longitude) {
+        assertThrows(BoundOfCoordinatesValueException.class, () -> weatherService.getLastWeekWeather(latitude, longitude));
     }
 }

@@ -14,10 +14,11 @@ public class MeteoClientResponseDataHelper {
     public static final LocalTime EXAMPLE_SUNSET_TIME = LocalTime.of(21, 22);
     public static final double ZERO_PRECIPITATION_SUM = 0.0;
     public static final int SIZE_LIST_DAILY_METEO = 2;
-
+    public static final double LONGITUDE = 10.0;
+    public static final double LATITUDE = 5.0;
 
     public static MeteoClientResponse createMeteoClientResponse() {
-        return new MeteoClientResponse(5.0, 5.0, createDailyMeteoClientResponse());
+        return new MeteoClientResponse(LATITUDE, LONGITUDE, createDailyMeteoClientResponse());
     }
 
     public static DailyMeteoClientResponse createDailyMeteoClientResponse() {
